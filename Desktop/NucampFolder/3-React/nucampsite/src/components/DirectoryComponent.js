@@ -1,49 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
 
-class Directory extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            campsites: [
-                {
-                    id: 0,
-                    name: 'React Lake Campground',
-                    image: 'assets/images/react-lake.jpg',
-                    elevation: 1233,
-                    description: "Nestled in the foothills of the Chrome Mountains, this campground on the shore of the pristine React Lake is a favorite for fly fishers."
-                },
-                { 
-                    id: 1,
-                    name: 'Chrome River campground',
-                    image: 'assets/images/chrome-river.jpg',
-                    elevation: 2901,
-                    description: "Let NuCamp be your guid to this off-the-beaten-path, hike-in-only Campground."
-                },
-                {
-                    id: 2,
-                    name: 'Breadcrumb Trail Campground',
-                    image: 'assets/images/breadcrumb-trail.jpg',
-                    elevation: 2901,
-                    description: "Let NuCamp be your guide to this off-the-beaten-path, hike-in-only campground."
-                },
-                {
-                    id: 3,
-                    name: 'Redux Woods Campground',
-                    image: 'assets/images/redux-woods.jpg',
-                    elevation: 42,
-                    description: "You'll never want to leave this hidden gem, deep within the lush Redux Woods."
-                }
-            ],
-        };
-    }
+function RenderDirectoryItems({campsite, onClick}) {
+    return (
+        <Card onClick={() => onClick(campsite.id)}>
+        <CardImg width="100%" src={campsite.image} alt={campsite.name} />
+        <CardImgOverlay>
+            <CardTitle>{campsite.name}</CardTitle>
+        </CardImgOverlay>
+    </Card>
+    );
+}
 
-    render() {
-        const directory = this.state.campsites.map(campsite => {
+
+function Directory(props) {
+    
+        const directory = props.campsites.map(campsite => {
             return (
-                <div key={campsite.id} className="col">
-                    <img src={campsite.image} alt={campsite.name} />
-                    <h2>{campsite.name}</h2>
-                    <p>{campsite.description}</p>
+                <div key={campsite.id} className="col-md-5">
+                   <RenderDirectoryItems campsite={campsite} onClick={props.onClick} />
                 </div>
             );
         });
@@ -53,9 +28,10 @@ class Directory extends Component {
                 <div className="row">
                     {directory}
                 </div>
-            </div> 
-        );
-    }
-}
+            </div>
+            );
+        }
+    
+
 
 export default Directory;
