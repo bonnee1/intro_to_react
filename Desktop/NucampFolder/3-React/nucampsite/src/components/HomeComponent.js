@@ -27,7 +27,6 @@ function Home(props) {
                     <RenderCard item={props.partner} />
                 </div>
             </div>
-            
         </div>
     );
 }

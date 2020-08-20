@@ -5,6 +5,7 @@ import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
+import About from './AboutComponent'; 
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { CAMPSITES } from '../shared/campsites';
 import { COMMENTS } from '../shared/comments';
@@ -32,17 +33,17 @@ class Main extends Component {
                 <Home
                 campsite={this.state.campsites.filter(campsite => campsite.featured)[0]}
                 promotion={this.state.promotions.filter(promotion => promotion.featured)[0]} 
-                partner={this.state.partners.filter(partner => partner.featured)[0]} />
+                partner={this.state.partners.filter(partner => partner.featured)[0]} 
+                />
             );
         }
 
+      
         const CampsiteWithId = ({match}) => {
             return (
                 <CampsiteInfo 
-                    campsite={this.state.campsites.filter(campsite => campsite.id ===
-                    +match.params.campsiteId)[0]}
-                    comments={this.state.comments.filter(comment => comment.campsiteId ===
-                    +match.params.campsiteId)[0]} 
+                    campsite={this.state.campsites.filter(campsite => campsite.id === +match.params.campsiteId)[0]}
+                    comments={this.state.comments.filter(comment => comment.campsiteId === +match.params.campsiteId)}
                 />
             );
         }
@@ -56,6 +57,7 @@ class Main extends Component {
                     />} />
                     <Route path='/directory/:campsiteId' component={CampsiteWithId} />
                     <Route exact path='/contactus' component={Contact} />
+                    <Route exact path='/aboutus' render={() => <About partners={this.state.partners} />} />
                     <Redirect to='/home' />
                 </Switch>
                 <Footer />

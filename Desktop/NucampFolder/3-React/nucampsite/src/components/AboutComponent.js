@@ -2,14 +2,32 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+function RenderPartner({partner}) {
+    if (partner) {
+        return (
+            <h3>The partner is rendering</h3>
+          //  <React.Fragment>
+            //    <Media object src={partner.image} width="150" alt={partner.name} />
+             //   <Media body className="ml-5 mb-4">
+               //     <Media heading>{partner.name}</Media>
+              //      {partner.description}
+            //    </Media>
+           // </React.Fragment>
+        );
+    }
+    return <div />;
+}
+        
 
 function About(props) {
 
-    const partners = props.partners.map(partner => {
+    const partners = props.partners.map((partner) => {
         return (
-            <h5>{partner.name}</h5>
+          <Media tag="li" key={partner.id}>
+            <RenderPartner partner={partner} />
+          </Media>
         );
-    });
+      });
 
     return (
         <div className="container">
