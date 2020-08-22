@@ -7,19 +7,10 @@ import './App.css';
 
 const store = ConfigureStore();
 
-    <Provider store={store}>
-        <BrowserRouter>
-            <div className="App">
-                <Main />
-            </div>
-        </BrowserRouter>
-    </Provider>
-
-
 class App extends Component {
    render() {
         return (
-            <Provider vstore={store}>
+            <Provider store={store}>
                 <BrowserRouter>
                     <div className="App">
                         <Main />
