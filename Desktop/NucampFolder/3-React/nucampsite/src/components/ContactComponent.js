@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BreadcrumbItem, Breadcrumb, Button, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { Control, LocalForm, contact, Errors } from 'react-redux-form';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
 
 const required = val => val && val.length;
@@ -96,7 +96,7 @@ class Contact extends Component {
                                 }}
                                 />
                                 <Errors
-                                    className="text=danger"
+                                    className="text-danger"
                                     model=".firstName"
                                     show="touched"
                                     component="div"
@@ -121,7 +121,7 @@ class Contact extends Component {
                                 }} 
                                 />
                                 <Errors
-                                    className="text=danger"
+                                    className="text-danger"
                                     model=".lastName"
                                     show="touched"
                                     component="div"
@@ -147,7 +147,7 @@ class Contact extends Component {
                             }}
                             />
                             <Errors
-                                    className="text=danger"
+                                    className="text-danger"
                                     model=".tel"
                                     show="touched"
                                     component="div"
@@ -172,7 +172,7 @@ class Contact extends Component {
                             }} 
                             />
                             <Errors
-                                    className="text=danger"
+                                    className="text-danger"
                                     model=".email"
                                     show="touched"
                                     component="div"
