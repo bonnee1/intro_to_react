@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import { Loading } from './LoadingComponent';
-
-
-
+import { baseUrl } from '../shared/baseUrl';
+/*updating the source attribute for the card image to use that baseUrl. 
+  We won't be loading image from the client side. we'll getting it from the server instead*/
 function RenderCard({item, isLoading, errMess}) {
     if (isLoading) {
         return <Loading />;
@@ -13,27 +13,31 @@ function RenderCard({item, isLoading, errMess}) {
     }
     return (
         <Card>
-            <CardImg src={item.image} alt={item.name} />
+            <CardImg src={baseUrl + item.image} alt={item.name} />
             <CardBody>
-                <CardTitle>{item.name}></CardTitle>
-                <CardText> {item.description}</CardText>
+                <CardTitle>{item.name}</CardTitle>
+                <CardText>{item.description}</CardText>
             </CardBody>
         </Card>
     );
 }
-
 function Home(props) {
     return (
         <div className="container">
             <div className="row">
                 <div className="col-md m-1">
-                    <RenderCard item={props.campsite}
-                    isLoading={props.campsitesLoading}
-                    errMess={props.campsitesErrMess} 
+                    <RenderCard
+                        item={props.campsite}
+                        isLoading={props.campsitesLoading}
+                        errMess={props.campsitesErrMess}
                     />
                 </div>
                 <div className="col-md m-1">
-                    <RenderCard item={props.promotion} />
+                    <RenderCard 
+                        item={props.promotion} 
+                        isLoading={props.promotionLoading}
+                        errMess={props.promotionErrMess}
+                    />
                 </div>
                 <div className="col-md m-1">
                     <RenderCard item={props.partner} />
@@ -42,5 +46,4 @@ function Home(props) {
         </div>
     );
 }
-
-export default Home;
+export default Home; 
