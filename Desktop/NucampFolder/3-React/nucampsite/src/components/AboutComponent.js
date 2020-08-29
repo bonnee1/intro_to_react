@@ -1,33 +1,58 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+import { Fade, Stagger } from 'react-animation-components'
 
 function RenderPartner({partner}) {
     if (partner) {
         return (
-            <h3>The partner is rendering</h3>
-          //  <React.Fragment>
-            //    <Media object src={partner.image} width="150" alt={partner.name} />
-             //   <Media body className="ml-5 mb-4">
-               //     <Media heading>{partner.name}</Media>
-              //      {partner.description}
-            //    </Media>
-           // </React.Fragment>
+            <React.Fragment>
+               <Media object src={baseUrl + partner.image} width="150" alt={partner.name} />
+                <Media body className="ml-5 mb-4">
+                    <Media heading>{partner.name}</Media>
+                    {partner.description}
+                </Media>
+            </React.Fragment>
         );
     }
     return <div />;
 }
         
+function PartnerList(props) {
+    const {isLoading, errMess, partners} = props.partners;
+    const partnerList = partners.map((partner) => {
+        return (
+            <Fade key={partner.id} exitOpacity={0.1}>
+            <Media tag="li">
+              <RenderPartner partner={partner} />
+            </Media>
+            </Fade>
+        )
+    })
+    if (isLoading) {
+        return <Loading />
+    }
+    if (errMess) {
+        return <h4>{errMess}</h4>
+    }
+    return (
+        <div className="col mt-4">
+            <Media list>
+                <Stagger in>
+                {partnerList}
+                </Stagger>
+            </Media>
+        </div>
+    )
+    
+}
 
 function About(props) {
 
-    const partners = props.partners.map((partner) => {
-        return (
-          <Media tag="li" key={partner.id}>
-            <RenderPartner partner={partner} />
-          </Media>
-        );
-      });
+          
+
 
     return (
         <div className="container">
@@ -83,7 +108,7 @@ function About(props) {
                 </div>
                 <div className="col mt-4">
                     <Media list>
-                        {partners}
+                        <PartnerList partners={props.partners} /> 
                     </Media>
                 </div>
             </div>
