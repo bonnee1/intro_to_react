@@ -67,12 +67,12 @@ export const commentsFailed = errMess => ({
 
 export const addComments = comments => ({
     type: ActionTypes.ADD_COMMENTS,
-    payload: comments
+    payload: comments,
 });
 
 export const addComment = comment => ({
     type: ActionTypes.ADD_COMMENT,
-    payload: comment
+    payload: comment,
 });
 
 export const postComment = (campsiteId, rating, author, text) => dispatch => {
@@ -91,7 +91,7 @@ export const postComment = (campsiteId, rating, author, text) => dispatch => {
             "Content-Type": "application/json"
         }
     })
-    .then(response => {
+    .then((response) => {
         if (response.ok) {
             return response;
         } else {
